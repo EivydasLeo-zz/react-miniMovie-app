@@ -1,31 +1,43 @@
 import React, { Component } from 'react';
+import { genres } from '../services/fakeGenreService';
 import { getMovies } from '../services/fakeMovieService';
 export default class MovieTable extends Component {
   state = {
     movies: getMovies(),
-    count: 1,
   };
+
+  deleteBtn() {}
 
   render() {
     return (
       <div>
-        <h3>Pleasee see out movies</h3>;
-        <ol>
-          {this.state.movies.map((m) => (
-            <li key={m._id}>
-              <p>{m.title}</p>
-            </li>
-          ))}
-        </ol>
+        <h3>Pleasee see out movies</h3>
+        <p>Showing XX Movies in our store</p>
+        <table className="table table-striped ">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Genre</th>
+              <th>Stock</th>
+              <th>Rate</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.movies.map((m) => (
+              <tr key={m._id}>
+                <th>{m.title}</th>
+                <td>{m.genre.name}</td>
+                <td>{m.numberInStock}</td>
+                <td>{m.dailyRentalRate}</td>
+                <td>
+                  <button className="btn btn-danger btn-sm">Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     );
   }
 }
-
-// 1.prisideti boostrap@4.6
-// 2.isitrauksim boostrap css
-
-// 3.sugeneruosim lentele su movies duomenimis
-// https://getbootstrap.com/docs/4.6/content/tables/
-
-// 4.
