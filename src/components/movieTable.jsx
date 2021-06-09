@@ -9,7 +9,7 @@ export default class MovieTable extends Component {
   render() {
     return (
       <div>
-        <h3>Movie table is here</h3>;
+        <h3>Pleasee see out movies</h3>;
         <ol>
           {this.state.movies.map((m) => (
             <li key={m._id}>
@@ -21,3 +21,11 @@ export default class MovieTable extends Component {
     );
   }
 }
+
+// 1.prisideti boostrap@4.6
+// 2.isitrauksim boostrap css
+
+// 3.sugeneruosim lentele su movies duomenimis
+// https://getbootstrap.com/docs/4.6/content/tables/
+
+// 4.
