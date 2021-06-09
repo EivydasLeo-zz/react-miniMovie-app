@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
-import { genres } from '../services/fakeGenreService';
 import { getMovies } from '../services/fakeMovieService';
 export default class MovieTable extends Component {
   state = {
     movies: getMovies(),
   };
 
-  deleteBtn() {}
-
   render() {
+    const { movies: mv } = this.state;
+
+    if (mv.length === 0) return <div className="alert alert-warning">There are no movies at the moment</div>;
+
     return (
       <div>
         <h3>Pleasee see out movies</h3>
-        <p>Showing XX Movies in our store</p>
+        <p>Showing {mv.length} Movies in our store</p>
         <table className="table table-striped ">
           <thead>
             <tr>
@@ -31,7 +32,9 @@ export default class MovieTable extends Component {
                 <td>{m.numberInStock}</td>
                 <td>{m.dailyRentalRate}</td>
                 <td>
-                  <button className="btn btn-danger btn-sm">Delete</button>
+                  <button onClick={() => this.handleDelete(m._id)} className="btn btn-danger btn-sm">
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
@@ -40,4 +43,9 @@ export default class MovieTable extends Component {
       </div>
     );
   }
+  handleDelete = (id) => {
+    console.log('u want to delete me?', id);
+    const movies = this.state.movies.filter((m) => m._id !== id);
+    this.setState({ movies });
+  };
 }
