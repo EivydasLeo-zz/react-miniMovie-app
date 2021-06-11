@@ -12,14 +12,24 @@ class App extends Component {
       { id: 1, isDone: false, title: 'Buy Milk' },
       { id: 2, isDone: true, title: 'Buy Tv' },
       { id: 3, isDone: false, title: 'Go to Park' },
-      { id: 4, isDone: false, title: 'Learn React' },
+      { id: 4, isDone: true, title: 'Learn React' },
     ],
   };
+
+  handleDoneUndone = (idToCheckUncheck) => {
+    // paspaudus rutuliuka
+    console.log('done undone', idToCheckUncheck);
+
+    // pasidaryti todos kopija
+
+    // surasti todo kuris paspaude ir pakeisti jo busena
+  };
+
   render() {
     return (
       <div className="App">
         <AppHeader />
-        <AppList todos={this.state.todos} />
+        <AppList onDoneUndone={this.handleDoneUndone} todos={this.state.todos} />
         <AppAddTodo />
       </div>
     );
