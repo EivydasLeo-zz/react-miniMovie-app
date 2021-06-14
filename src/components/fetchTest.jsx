@@ -10,10 +10,15 @@ class FetchTest extends Component {
     this.setState({ todoTitle: e.target.value });
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.getTodos();
+  }
 
   getTodos = () => {
-    fetch('http://localhost:3002/api/todos/new');
+    fetch('http://localhost:3002/api/todos')
+      .then((resp) => resp.json())
+      .then((data) => this.setState({ todos: data }))
+      .catch((err) => console.log(err));
   };
 
   handleNewTodo = () => {
@@ -30,7 +35,11 @@ class FetchTest extends Component {
       body: JSON.stringify(newTodo),
     })
       .then((resp) => resp.json())
-      .then((ats) => console.log(ats))
+      .then((ats) => {
+        console.log(ats);
+        this.getTodos();
+        this.setState({ todoTitle: '' });
+      })
       .catch((err) => console.error(err));
   };
 
@@ -41,11 +50,9 @@ class FetchTest extends Component {
         <input onChange={this.syncTitle} value={this.state.todoTitle} type="text" placeholder="add new todo" />
         <button onClick={this.handleNewTodo}>Save New Todo</button>
         <ul>
-          <li>Go to park</li>
-          <li>Go to park</li>
-          <li>Go to park</li>
-          <li>Go to park</li>
-          <li>Go to park</li>
+          {this.state.todos.map((t) => (
+            <li key={t._id}>{t.title}</li>
+          ))}
         </ul>
       </div>
     );
