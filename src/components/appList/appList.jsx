@@ -4,11 +4,12 @@ import './style.css';
 class AppList extends Component {
   state = {};
   render() {
-    console.log(this.props.todos);
+    console.log(this.props);
+    const { onDelete, onDoneUndone, onEdit, todos } = this.props;
     return (
       <ul className="todo-list">
-        {this.props.todos.map((t) => (
-          <TodoEl onDoneUndone={this.props.onDoneUndone} singleTodo={t} key={t.id}></TodoEl>
+        {todos.map((t) => (
+          <TodoEl onEdit={onEdit} onDelete={onDelete} onDoneUndone={onDoneUndone} singleTodo={t} key={t.id}></TodoEl>
         ))}
       </ul>
     );
