@@ -3,10 +3,17 @@ import React, { Component } from 'react';
 class FetchTest extends Component {
   state = {
     todoTitle: '',
+    todos: [],
   };
 
   syncTitle = (e) => {
     this.setState({ todoTitle: e.target.value });
+  };
+
+  componentDidMount() {}
+
+  getTodos = () => {
+    fetch('http://localhost:3002/api/todos/new');
   };
 
   handleNewTodo = () => {
@@ -16,6 +23,10 @@ class FetchTest extends Component {
     };
     fetch('http://localhost:3002/api/todos/new', {
       method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(newTodo),
     })
       .then((resp) => resp.json())
@@ -29,6 +40,13 @@ class FetchTest extends Component {
         <h1>Fetch test</h1>
         <input onChange={this.syncTitle} value={this.state.todoTitle} type="text" placeholder="add new todo" />
         <button onClick={this.handleNewTodo}>Save New Todo</button>
+        <ul>
+          <li>Go to park</li>
+          <li>Go to park</li>
+          <li>Go to park</li>
+          <li>Go to park</li>
+          <li>Go to park</li>
+        </ul>
       </div>
     );
   }
