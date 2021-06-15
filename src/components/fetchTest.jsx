@@ -20,24 +20,11 @@ class FetchTest extends Component {
 
   handleNewTodo = () => {
     console.log('works like a charm');
-    const newTodo = {
-      title: this.state.todoTitle,
-    };
-    fetch('http://localhost:3002/api/todos/new', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newTodo),
-    })
-      .then((resp) => resp.json())
-      .then((ats) => {
-        console.log(ats);
-        this.getTodos();
-        this.setState({ todoTitle: '' });
-      })
-      .catch((err) => console.error(err));
+    GetSendData.createTodo(this.state.todoTitle, (ats) => {
+      console.log('ats is create', ats);
+      this.getTodos();
+      this.setState({ todoTitle: '' });
+    });
   };
 
   render() {

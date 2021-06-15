@@ -18,13 +18,3 @@ input[type='text'] {
   line-height: 1.5;
   padding: 0.1em;
 }
-
-.App {
-  max-width: 600px;
-  margin: 0 auto;
-  margin-top: 5%;
-  border-radius: 1em;
-  border: 1px solid black;
-  overflow: hidden;
-  padding: 1em;
-}
